@@ -1,13 +1,14 @@
-<h1>Forker un dépôt dans le but d'y contribuer</h1>
-1) Forker un dépôt dans github : dans la page du dépôt, cliquer sur "fork" en haut à droite. À partir de maintenant j'appellerai Origine notre fork, et Upstream le dépôt d'origine.<br>
-2) Cloner Origine en local :<br>
-$ git clone https://github.com/<origine><br>
-3) Configurer le dépôt local pour qu'il pousse par défaut sur Origine <br>
-$ git config remote.pushdefault origin # Publier par défaut sur le dépôt 'origin'<br>
-$ git config push.default current # Publier par défaut sur une branche portant le même nom que la branche courante dans le dépôt de publication<br>
-4) Ajouter le remote Upstream, puis le fetcher : <br>
-$ git remote add upstream https://github.cm/<upstream><br>
-$ git fetch uptsream<br>
+<h1>Procédure pour forker un dépôt dans l'intention d'y contribuer</h1>
+* Dans Github, forker le dépôt qui nous intéresse<br>
+* Dans Netbeans créer un projet BOUM_DAY_JAVA<br>
+* dans la console, aller dans le dossier NetbeansProject/BOUM_DAY_JAVA<br>
+* $ rm -rf *<br>
+* $ git init<br>
+* $ git remote add origin https://[mon fork sur github]<br>
+* $ git remote add upstream https://[le dépôt d'origine]<br>
+* $ git config remote.pushdefault origin<br>
+* $ git config push.default current<br>
+* $ git pull upstream master<br>
 
 <h1>Pour contribuer via une pull request</h1>
 1) Faire mes modifs<br>
