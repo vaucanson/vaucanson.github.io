@@ -1,33 +1,33 @@
-<h1>Procédure pour forker un dépôt dans l'intention d'y contribuer</h1>
-* Dans Github, forker le dépôt qui nous intéresse<br>
-* Dans Netbeans créer un projet BOUM_DAY_JAVA<br>
-* dans la console, aller dans le dossier NetbeansProject/BOUM_DAY_JAVA<br>
-* $ rm -rf *<br>
-* $ git init<br>
-* $ git remote add origin https://[mon fork sur github]<br>
-* $ git remote add upstream https://[le dépôt d'origine]<br>
-* $ git config remote.pushdefault origin<br>
-* $ git config push.default current<br>
-* $ git pull upstream master<br>
+<!DOCTYPE html>
 
-<h1>Pour contribuer via une pull request</h1>
-1) Faire mes modifs<br>
-2) Commiter mes modifs :<br>
-$ git add <mes fichiers><br>
-$ git commit -m 'mon commentaire'<br>
-3) Pousser sur Origine :<br>
-$ git push<br>
-4) Dans la page github d'Origine, cliquer sur « pull request »<br>
-SUR WINDOWS
+<html>
 
-INSTALLATION.
-À FAIRE UNE SEULE FOIS PAR PC
-- installer Git : <url de git> 
-- config : 
-git config --global user.name "Votre nom ou pseudo"
-git config --global user.email "Votre@email.com"
+    <head>
 
--- éditer son fichier de config global. Pour le connaître, taper git config -l --show-origin : normalement c'est le fichier des premières lignes.
+        <!-- En-tête de la page -->
+
+        <meta charset="utf-8" />
+
+        <title>Git/Github pour les CDI 2018 AFPA Pont-de-Claix power</title>
+
+    </head>
+
+
+<body>
+
+<h1>Git/Github</h1>
+
+<h1>Installation</h1>
+<h3>À faire une seule fois par PC</h3>
+<p>
+<ul>
+<li>installer Git. Pour Windows : <a href=https://git-scm.com/>git-scm</a> </li>
+<li>config : <ul>
+<li><code style=bash>git config --global user.name "Votre nom ou pseudo"</code></li>
+<li><code style=bash>git config --global user.email "Votre@email.com"</code></li>
+</ul>
+<li>Installer un outil de merge, par exemple <a href=http://winmerge.org/downloads/?lang=fr>Winmerge</a> pour Windows</li>
+<li>éditer son fichier de config global. Pour le connaître, taper <code style=bash>git config -l --show-origin</code> : c'est le fichier correspondant aux user.name et user.email qu'on vient d'ajouter. <br>Ajouter les lignes suivantes :</li><pre>
 [diff]
     tool = winmerge
 [difftool "winmerge"]
@@ -38,36 +38,83 @@ git config --global user.email "Votre@email.com"
 [mergetool "winmerge"]
     path = C:/Program Files (x86)/WinMerge/winmergeu.exe
     cmd = \"C:/Program Files (x86)/WinMerge/winmergeu.exe\" -r -u \"$LOCAL\" \"$REMOTE\"
+</pre>
+</ul>
+</p>
 
 
-FORK D'UN DÉPÔT DANS LE BUT D'Y CONTRIBUER
-À FAIRE UNE SEULE FOIS PAR DÉPÔT AUQUEL ON VEUT CONTRIBUER
-<j'ai déjà>
+<h1>Fork d'un dépôt dans le but d'y contribuer</h1>
+<h3>À faire une seule fois par dépôt auquel on veut contribuer</h3>
+<p>
+<ul>
+<li>Dans Github, forker le dépôt qui nous intéresse</li>
+<li>nécessaire pour NetBeans, et probablement pour Eclipse aussi :</li>
+<ul>
+<li>Dans Netbeans créer un projet MonProjet</li>
+<li>dans la console, aller dans le dossier NetbeansProject/MonProjet</li>
+<li>supprimer tout ce que NetBeans a mis par défaut, sinon Git ne voudra pas tirer correctement le contenu distant :</li>
+<li><code style=bash>rm -rf * # attention ça supprime tout le contenu du dossier</code></li>
+</ul>
+<li>Puis se placer dans le répertoire où on veut mettre notre dépôl local</li>
+<li><code style=bash>git init</code></li>
+<li><code style=bash>git remote add origin https://[mon fork sur github]</code></li>
+<li><code style=bash>git remote add upstream https://[le dépôt d'origine]</code></li>
+<li><code style=bash>git config remote.pushdefault origin</code></li>
+<li><code style=bash>git config push.default current</code></li>
+<li><code style=bash>git pull upstream master</code></li>
+
+</ul>
+</p>
 
 
-CONTRIBUTION
-À FAIRE À CHAQUE FOIS QU'ON VEUT CONTRIBUER
+<h1>Contribuer</h1>
+<h3>À faire à chaque contribution</h3>
+<p>
+<ul>
+<li>on crée une nouvelle branche :</li>
+<ul>
+<li><code style=bash>git checkout -b travail</code></li>
+</ul>
+<li>faire ses modifications :</li>
+<ul>
+<li>je travaille sur mon code</li>
+<li><code style=bash>git add [fichiers]</code></li>
+<li><code style=bash>git commit -m 'commentaire'</code></li>
+<li>à répéter autant de fois que nécessaire</li>
+</ul>
 
-git checkout -b travail
--- faire ses modifications :
-git add <fichiers>
-git commit -m 'commentaire'
--- à répéter autant de fois que nécessaire
+<li>puis avant de pusher :</li>
+<ul>
+<li><code style=bash>git checkout master # on repasse sur la branche master</code></li>
+<li><code style=bash>git pull upstream master# on pulle toutes les modifs</code></li>
+<li><code style=bash>git checkout travail # on repasse sur la branche de travail</code></li>
+<li><code style=bash>git merge master # on merge</code></li>
+</ul>
+<li>là, soit le merge automatique se passe bien, soit ça nous dit quelque chose comme :
+<pre>
+Auto-merging machin
+CONFLICT (content): Merge conflict in machin
+Automatic merge failed; fix conflicts and then commit the result.
+</pre>
+auquel cas on doit faire :</li>
+<ul>
+<li><code style=bash>git mergetool</code></li>
+<li>et là on merge chaque fichier avec l'outil de merge qu'on a défini plus haut</li>
+</ul>
+<li>quand le merge est fini :</li>
+<ul>
+<li><code style=bash>git commit # on peut laisser le commentaire par défaut, y'a qu'à le valider en tapant ":" puis "wq" dans l'écran qui suit</code></li>
+<li><code style=bash>git push</code></li>
+</ul>
+<li>Optionnellement, mais c'est quand même conseillé, on peut supprimer sa branche de travail. De toute façon on en crée une nouvelle chaque fois que nécessaire, c'est pas un souci.</li>
+<ul>
+<li><code style=bash>git checkout master  # on repasse sur la branche master</code></li>
+<li><code style=bash>git branch -d travail  # on supprime la branche travail</code></li>
+</ul>
+<li>Et ensuite on va faire sa pull request dans Github</li>
 
--- puis avant de pusher :
-git checkout master -- on repasse sur la branche master
-git pull -- on pulle toutes les modifs
-git checkout travail -- on repasse sur la branche de travail
-git merge master -- on merge
--- là, soit le merge automatique se passe bien, soit on doit faire :
+</ul>
+<p>
 
-git mergetool
-
--- quand le merge est fini :
-git push
-
-
-
-
-ASTUCE :
-pour connaître les différents fichiers de config, taper : git config --list --show-origin
+</body>
+</html>
