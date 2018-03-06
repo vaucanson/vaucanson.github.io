@@ -18,3 +18,56 @@ $ git commit -m 'mon commentaire'<br>
 3) Pousser sur Origine :<br>
 $ git push<br>
 4) Dans la page github d'Origine, cliquer sur « pull request »<br>
+SUR WINDOWS
+
+INSTALLATION.
+À FAIRE UNE SEULE FOIS PAR PC
+- installer Git : <url de git> 
+- config : 
+git config --global user.name "Votre nom ou pseudo"
+git config --global user.email "Votre@email.com"
+
+-- éditer son fichier de config global. Pour le connaître, taper git config -l --show-origin : normalement c'est le fichier des premières lignes.
+[diff]
+    tool = winmerge
+[difftool "winmerge"]
+    path = C:/Program Files (x86)/WinMerge/winmergeu.exe
+    cmd = \"C:/Program Files (x86)/WinMerge/winmergeu.exe\" -r -u \"$LOCAL\" \"$REMOTE\"
+[merge]
+    tool = winmerge
+[mergetool "winmerge"]
+    path = C:/Program Files (x86)/WinMerge/winmergeu.exe
+    cmd = \"C:/Program Files (x86)/WinMerge/winmergeu.exe\" -r -u \"$LOCAL\" \"$REMOTE\"
+
+
+FORK D'UN DÉPÔT DANS LE BUT D'Y CONTRIBUER
+À FAIRE UNE SEULE FOIS PAR DÉPÔT AUQUEL ON VEUT CONTRIBUER
+<j'ai déjà>
+
+
+CONTRIBUTION
+À FAIRE À CHAQUE FOIS QU'ON VEUT CONTRIBUER
+
+git checkout -b travail
+-- faire ses modifications :
+git add <fichiers>
+git commit -m 'commentaire'
+-- à répéter autant de fois que nécessaire
+
+-- puis avant de pusher :
+git checkout master -- on repasse sur la branche master
+git pull -- on pulle toutes les modifs
+git checkout travail -- on repasse sur la branche de travail
+git merge master -- on merge
+-- là, soit le merge automatique se passe bien, soit on doit faire :
+
+git mergetool
+
+-- quand le merge est fini :
+git push
+
+
+
+
+ASTUCE :
+pour connaître les différents fichiers de config, taper : git config --list --show-origin
